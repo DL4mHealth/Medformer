@@ -1,0 +1,7 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+# Checkpoints and results
+checkpoints/
+results/
+# Raw data
+dataset/
