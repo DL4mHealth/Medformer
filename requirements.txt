@@ -10,3 +10,6 @@ sktime==0.16.1
 sympy==1.11.1
 torch==1.7.1
 tqdm==4.64.1
+wfdb==4.1.2
+neurokit2==0.2.9
+mne==1.6.1
