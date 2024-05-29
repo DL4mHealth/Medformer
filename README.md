@@ -14,6 +14,7 @@ Results demonstrate Medformer's superiority over 10 baselines, achieving top ave
 
 ## Token Embedding Methods
 ![Token Embedding Methods](figs/token_embedding_methods.png)
+
 **[Vanilla transformer](https://arxiv.org/pdf/1706.03762)**
 , **[Autoformer](https://arxiv.org/pdf/2106.13008)**, and **[Informer](https://arxiv.org/pdf/2012.07436)** employ a single cross-channel timestamp as a token; 
 **[iTransformer](https://arxiv.org/pdf/2310.06625)** utilizes an entire channel as a token; 
@@ -23,8 +24,8 @@ For medical time series classification, we propose Medformer considering inter-c
 
 ## Overview of Medformer
 ![Overview of Medformer](figs/medformer_architecture.png)
-a) Workflow.
-b) For the input sample ${x}_{\textrm{in}}$, we apply $n$ different patch lengths in parallel to create patched features ${x}_p^{(i)}$, where $i$ ranges from 1 to $n$. 
+
+a) Workflow. b) For the input sample ${x}_{\textrm{in}}$, we apply $n$ different patch lengths in parallel to create patched features ${x}_p^{(i)}$, where $i$ ranges from 1 to $n$. 
 Each patch length represents a different granularity. These patched features are then linearly transformed into ${x}_e^{(i)}$, which are subsequently augmented into $\widetilde{x}_e^{(i)}$.
 c) We obtain the final patch embedding ${x}^{(i)}$ by fusing augmented $\widetilde{{x}}_e^{(i)}$ with the positional embedding ${{W}}{\text{pos}}$ and the granularity embedding ${W}{\text{gr}}^{(i)}$.
 Additionally, we design a granularity-specific router ${u}^{(i)}$ to capture integrated information for its respective granularity. 
