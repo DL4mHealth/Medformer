@@ -14,9 +14,8 @@ python \
   --batch_size 128 \
   --d_model 128 \
   --d_ff 256 \
-  --patch_len_list 2,4,8,8,16,16,16,16,32,32,32,32,32,32,32,32 \
-  --augmentations drop0.5 \
-  --swa \
+  --patch_len_list 1,2,4 \
+  --augmentations none,jitter,scale,drop \
   --des 'Exp' \
   --itr 5 \
   --learning_rate 0.0001 \
