@@ -13,7 +13,7 @@ Results demonstrate Medformer's superiority over 10 baselines, achieving top ave
 
 
 ## Token Embedding Methods
-![Token Embedding Methods](figs/token_embedding_methods.png){width=50%}
+![Token Embedding Methods](figs/token_embedding_methods.png)
 **[Vanilla transformer](https://arxiv.org/pdf/1706.03762)**
 , **[Autoformer](https://arxiv.org/pdf/2106.13008)**, and **[Informer](https://arxiv.org/pdf/2012.07436)** employ a single cross-channel timestamp as a token; 
 **[iTransformer](https://arxiv.org/pdf/2310.06625)** utilizes an entire channel as a token; 
