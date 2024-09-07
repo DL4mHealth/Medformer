@@ -141,7 +141,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--patch_len_list",
         type=str,
-        default="1,2,4",
+        default="2,4,8",
         help="a list of patch len used in Medformer",
     )
     parser.add_argument(
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--augmentations",
         type=str,
-        default="none",
+        default="flip,shuffle,jitter,mask,drop",
         help="a comma-seperated list of augmentation types (none, jitter or scale). Append numbers to specify the strength of the augmentation, e.g., jitter0.1",
     )
 
@@ -255,6 +255,8 @@ if __name__ == "__main__":
             # otherwise it will slow down the training extremely
             torch.backends.cudnn.benchmark = False
             torch.backends.cudnn.deterministic = True
+
+
             # setting record of experiments
             args.seed = seed
             setting = "{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_{}_seed{}".format(
