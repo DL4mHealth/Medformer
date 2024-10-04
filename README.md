@@ -1,7 +1,7 @@
 # Medformer: A Multi-Granularity Patching Transformer for Medical Time-Series Classification (Neurips 2024)
 
 #### Authors: 
-#### [Yihe Wang*](https://scholar.google.com/citations?user=1JRRcVkAAAAJ&hl=en)(ywang145@charlotte.edu), [Nan Huang*](https://github.com/TeddyHuang-00)(nhuang1@charlotte.edu), [Taida Li*](https://webpages.charlotte.edu/tli14/)(tli14@charlotte),
+#### [Yihe Wang*](https://scholar.google.com/citations?user=1JRRcVkAAAAJ&hl=en)(ywang145@charlotte.edu), [Nan Huang*](https://github.com/TeddyHuang-00)(nhuang1@charlotte.edu), [Taida Li*](https://webpages.charlotte.edu/tli14/)(tli14@charlotte.edu),
 ####  [Yujun Yan](https://sites.google.com/umich.edu/yujunyan/home)(yujun.yan@dartmouth.edu), [Xiang Zhang](http://xiangzhang.info/)(xiang.zhang@charlotte.edu)
 
 #### Medformer Paper: [Preprint](https://arxiv.org/pdf/2405.19363)
