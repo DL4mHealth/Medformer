@@ -1,15 +1,15 @@
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 
 # Subject-Dependent
-# ADFD Dataset
+# ADFTD Dataset
 python \
   -u run.py \
   --task_name classification \
   --is_training 1 \
-  --root_path ./dataset/ADFD/ \
-  --model_id ADFD-Dep \
+  --root_path ./dataset/ADFTD/ \
+  --model_id ADFTD-Dep \
   --model MTST \
-  --data ADFD-Dependent \
+  --data ADFTD-Dependent \
   --e_layers 6 \
   --batch_size 128 \
   --d_model 128 \
@@ -63,15 +63,15 @@ python \
   --train_epochs 100 \
   --patience 10
 
-# ADFD Dataset
+# ADFTD Dataset
 python \
   -u run.py \
   --task_name classification \
   --is_training 1 \
-  --root_path ./dataset/ADFD/ \
-  --model_id ADFD-Indep \
+  --root_path ./dataset/ADFTD/ \
+  --model_id ADFTD-Indep \
   --model MTST \
-  --data ADFD \
+  --data ADFTD \
   --e_layers 6 \
   --batch_size 128 \
   --d_model 128 \
