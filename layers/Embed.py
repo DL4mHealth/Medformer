@@ -281,8 +281,8 @@ class ListPatchEmbedding(nn.Module):
         x_list = []
         for padding, value_embedding in zip(self.paddings, self.value_embeddings):
             x_new = padding(x).unsqueeze(1)  # (batch_size, 1, enc_in, seq_len+stride)
-            x_new = value_embedding(x_new)  # (batch_size, d_model, patch_num, 1)
-            x_new = x_new.squeeze().transpose(1, 2)  # (batch_size, patch_num, d_model)
+            x_new = value_embedding(x_new)  # (batch_size, d_model, 1, patch_num)
+            x_new = x_new.squeeze(2).transpose(1, 2)  # (batch_size, patch_num, d_model)
             # Per patch augmentation
             aug_idx = random.randint(0, len(self.augmentation) - 1)
             x_new = self.augmentation[aug_idx](x_new)

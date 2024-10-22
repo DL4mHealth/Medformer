@@ -89,6 +89,8 @@ if __name__ == "__main__":
     )
 
     # model define for baselines
+    parser.add_argument('--expand', type=int, default=2, help='expansion factor for Mamba')
+    parser.add_argument('--d_conv', type=int, default=4, help='conv kernel size for Mamba')
     parser.add_argument("--top_k", type=int, default=5, help="for TimesBlock")
     parser.add_argument("--num_kernels", type=int, default=6, help="for Inception")
     parser.add_argument("--enc_in", type=int, default=7, help="encoder input size")
@@ -153,8 +155,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--augmentations",
         type=str,
-        default="flip,shuffle,jitter,mask,drop",
-        help="a comma-seperated list of augmentation types (none, jitter or scale). Append numbers to specify the strength of the augmentation, e.g., jitter0.1",
+        default="flip,shuffle,frequency,jitter,mask,drop",
+        help="A comma-seperated list of augmentation types (none, jitter or scale). "
+             "Randomly applied to each granularity. "
+             "Append numbers to specify the strength of the augmentation, e.g., jitter0.1",
     )
 
     # optimization
@@ -253,8 +257,9 @@ if __name__ == "__main__":
             torch.cuda.manual_seed_all(seed)
             # comment out the following lines if you are using dilated convolutions, e.g., TCN
             # otherwise it will slow down the training extremely
-            torch.backends.cudnn.benchmark = False
-            torch.backends.cudnn.deterministic = True
+            if args.model != "TCN":
+                torch.backends.cudnn.benchmark = False
+                torch.backends.cudnn.deterministic = True
 
 
             # setting record of experiments
@@ -300,10 +305,11 @@ if __name__ == "__main__":
             torch.manual_seed(seed)
             torch.cuda.manual_seed(seed)
             torch.cuda.manual_seed_all(seed)
-            # comment out the following lines if you are using dilated convolutions
+            # comment out the following lines if you are using dilated convolutions, e.g., TCN
             # otherwise it will slow down the training extremely
-            torch.backends.cudnn.benchmark = False
-            torch.backends.cudnn.deterministic = True
+            if args.model != "TCN":
+                torch.backends.cudnn.benchmark = False
+                torch.backends.cudnn.deterministic = True
 
             args.seed = seed
             setting = "{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_{}_seed{}".format(

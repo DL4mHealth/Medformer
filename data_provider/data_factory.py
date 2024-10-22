@@ -1,22 +1,28 @@
 from data_provider.data_loader import (
     APAVALoader,
-    ADFDLoader,
-    ADFDDependentLoader,
+    ADFTDLoader,
+    DependentLoader,
     TDBRAINLoader,
     PTBLoader,
     PTBXLLoader,
+    FLAAPLoader,
+    UCIHARLoader,
 )
 from data_provider.uea import collate_fn
 from torch.utils.data import DataLoader
 
 data_dict = {
-    # following used in our paper
+    # Subject-Dependent setup
+    "ADFTD-Dependent": DependentLoader,  # dataset ADFTD with subject-dependent setup
+
+    # Subject-Independent setup
     "APAVA": APAVALoader,  # dataset APAVA
     "TDBRAIN": TDBRAINLoader,  # dataset TDBRAIN
-    "ADFD": ADFDLoader,  # dataset ADFD
-    "ADFD-Dependent": ADFDDependentLoader,  # dataset ADFD with subject-dependent setup
+    "ADFTD": ADFTDLoader,  # dataset ADFTD
     "PTB": PTBLoader,  # dataset PTB
     "PTB-XL": PTBXLLoader,  # dataset PTB-XL
+    "FLAAP": FLAAPLoader,  # dataset FLAAP
+    "UCI-HAR": UCIHARLoader,  # dataset HAR
 }
 
 
@@ -58,6 +64,7 @@ def data_provider(args, flag):
         drop_last = False
         data_set = Data(
             root_path=args.root_path,
+            args=args,
             flag=flag,
         )
 

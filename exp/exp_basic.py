@@ -11,6 +11,7 @@ from models import (
     PatchTST,
     Reformer,
     Transformer,
+    TCN,
     Medformer,
 )
 
@@ -29,6 +30,7 @@ class Exp_Basic(object):
             "PatchTST": PatchTST,
             "Reformer": Reformer,
             "Transformer": Transformer,
+            "TCN": TCN,
             "Medformer": Medformer,
         }
         self.device = self._acquire_device()

@@ -1,4 +1,4 @@
-einops==0.4.0
+einops~=0.5.0
 matplotlib==3.7.0
 numpy==1.23.5
 pandas==1.5.3
@@ -8,8 +8,6 @@ scikit-learn==1.2.2
 scipy==1.10.1
 sktime==0.16.1
 sympy==1.11.1
-torch==2.0.0
+torch~=2.0.0+cu118
 tqdm==4.64.1
-wfdb==4.1.2
-neurokit2==0.2.9
-mne==1.6.1
+natsort~=8.4.0
