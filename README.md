@@ -101,6 +101,15 @@ Since TDBrain need permission to get access first, we do not provide a download 
 Users need to request permission to download the raw data on the TDBrain official website and preprocess it with the jupyter notebook we provided.
 
 
+
+We also provide the processed data of two human activity recognition(HAR) datasets.
+We evaluate our method on them to test the generalization of our method 
+on non-MedTS data that potentially have inherently channel correlations.
+Here are the links:
+* [UCI-HAR](https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones) dataset: https://drive.google.com/file/d/13HA6l3dnOm46dN4EgzS_YRwHUGIEruKD/view?usp=drive_link
+* [FLAAP](https://data.mendeley.com/datasets/bdng756rgw/1) dataset: https://drive.google.com/file/d/17bqjWyh2nLOnfjHKV21LRhDg888J3Cth/view?usp=drive_link
+
+
 ## Experimental setups
 We evaluate our model in two settings: subject-dependent and subject-independent.
 In the subject-dependent setup, samples from the same subject can appear in both the training and test sets, causing information leakage. 
@@ -142,7 +151,6 @@ The recommended requirements are specified as follows:
 * wfdb==4.1.2
 * neurokit2==0.2.9
 * mne==1.6.1 
-* natsort~=8.4.0
   
 The dependencies can be installed by:  
 ```bash  
