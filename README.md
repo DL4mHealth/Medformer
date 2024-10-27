@@ -57,7 +57,7 @@ For the training, validation, and test set splits, we employ the subject-indepen
 Samples with subject IDs {18,19,20,21,46,47,48,49} are assigned to the validation set, while samples with subject IDs {22,23,24,25,50,51,52,53} are assigned to the test set. 
 The remaining samples are allocated to the training set.
 
-[ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6) is a public EEG time series dataset with 3 classes, including 36 Alzheimer's disease (AD) patients, 23 Frontotemporal Dementia (FD) patients, and 29 healthy control (HC) subjects. 
+[ADFTD](https://openneuro.org/datasets/ds004504/versions/1.0.6) is a public EEG time series dataset with 3 classes, including 36 Alzheimer's disease (AD) patients, 23 Frontotemporal Dementia (FTD) patients, and 29 healthy control (HC) subjects. 
 The dataset has 19 channels, and the raw sampling rate is 500Hz. Each subject has a trial, with trial durations of approximately 13.5 minutes for AD subjects (min=5.1, max=21.3), 12 minutes for FD subjects (min=7.9, max=16.9), and 13.8 minutes for HC subjects (min=12.5, max=16.5). 
 A bandpass filter between 0.5-45Hz is applied to each trial. We downsample each trial to 256Hz and segment them into non-overlapping 1-second samples with 256 timestamps, discarding any samples shorter than 1 second. 
 This process results in 69,752 samples. For the training, validation, and test set splits, we employ both the subject-dependent and subject-independent setups. 
@@ -171,11 +171,34 @@ After training and evaluation, the saved model can be found in`checkpoints/class
 and the results can be found in  `results/classification/`. 
 You can modify the parameters by changing the command line. 
 The meaning and explanation of each parameter in command line can be found in `run.py` file. 
-Since APAVA is the smallest dataset and faster to run, 
+Since APAVA is the smallest dataset and fast to run, 
 it is recommended to run and test our code with the APAVA dataset to get familiar with the framework.
+
+
+## Train on Custom Dataset
+
+To train the model on a custom dataset, you need to write a customized dataloader to load your processed data 
+in `data_provider/data_loader.py`, and add its name in `data_provider/data_factory.py`.
+Then you can run the training script with the dataset name you added in `data_factory.py`, 
+where the `--root_path` is the path to the root directory of the processed dataset
+and the `--data` is the name of the dataloader you added in `data_factory.py`.
+
+
+## Citation
+
+If you find this repo useful, please star our project and cite our paper.
+
+```
+@article{wang2024medformer,
+  title={Medformer: A Multi-Granularity Patching Transformer for Medical Time-Series Classification},
+  author={Wang, Yihe and Huang, Nan and Li, Taida and Yan, Yujun and Zhang, Xiang},
+  journal={Advances in Neural Information Processing Systems},
+  year={2024}
+}
+```
 
 
 ## Acknowledgement
 
-This codebase is constructed based on the repo: [Time-Series-Library](https://github.com/thuml/Time-Series-Library).
+This project is constructed based on the code in repo [Time-Series-Library](https://github.com/thuml/Time-Series-Library).
 Thanks a lot for their amazing work on implementing state-of-arts time series methods!
