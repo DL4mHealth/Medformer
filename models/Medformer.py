@@ -9,9 +9,7 @@ import numpy as np
 
 class Model(nn.Module):
     """
-    Vanilla Transformer
-    with O(L^2) complexity
-    Paper link: https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+    Paper link: https://arxiv.org/pdf/2405.19363
     """
 
     def __init__(self, configs):
@@ -34,6 +32,7 @@ class Model(nn.Module):
         self.enc_embedding = ListPatchEmbedding(
             configs.enc_in,
             configs.d_model,
+            configs.seq_len,
             patch_len_list,
             stride_list,
             configs.dropout,
@@ -67,7 +66,7 @@ class Model(nn.Module):
             self.dropout = nn.Dropout(configs.dropout)
             self.projection = nn.Linear(
                 configs.d_model
-                * sum(patch_num_list)
+                * len(patch_num_list)
                 * (1 if not self.single_channel else configs.enc_in),
                 configs.num_class,
             )

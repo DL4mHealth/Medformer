@@ -155,7 +155,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--augmentations",
         type=str,
-        default="flip,shuffle,frequency,jitter,mask,drop",
+        default="flip,frequency,jitter,mask,channel,drop",
         help="A comma-seperated list of augmentation types (none, jitter or scale). "
              "Randomly applied to each granularity. "
              "Append numbers to specify the strength of the augmentation, e.g., jitter0.1",

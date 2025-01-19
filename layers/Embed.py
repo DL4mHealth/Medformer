@@ -241,6 +241,7 @@ class ListPatchEmbedding(nn.Module):
         self,
         enc_in,
         d_model,
+        seq_len,
         patch_len_list,
         stride_list,
         dropout,
@@ -263,6 +264,7 @@ class ListPatchEmbedding(nn.Module):
         ]
         self.value_embeddings = nn.ModuleList(linear_layers)
         self.position_embedding = PositionalEmbedding(d_model=d_model)
+        self.channel_embedding = PositionalEmbedding(d_model=seq_len)
         self.dropout = nn.Dropout(dropout)
         self.augmentation = nn.ModuleList(
             [get_augmentation(aug) for aug in augmentation]
@@ -280,12 +282,15 @@ class ListPatchEmbedding(nn.Module):
 
         x_list = []
         for padding, value_embedding in zip(self.paddings, self.value_embeddings):
-            x_new = padding(x).unsqueeze(1)  # (batch_size, 1, enc_in, seq_len+stride)
+            x_copy = x.clone()
+            # per granularity augmentation
+            aug_idx = random.randint(0, len(self.augmentation) - 1)
+            x_new = self.augmentation[aug_idx](x_copy)
+            # add positional embedding to tag each channel
+            x_new = x_new + self.channel_embedding(x_new)
+            x_new = padding(x_new).unsqueeze(1)  # (batch_size, 1, enc_in, seq_len+stride)
             x_new = value_embedding(x_new)  # (batch_size, d_model, 1, patch_num)
             x_new = x_new.squeeze(2).transpose(1, 2)  # (batch_size, patch_num, d_model)
-            # Per patch augmentation
-            aug_idx = random.randint(0, len(self.augmentation) - 1)
-            x_new = self.augmentation[aug_idx](x_new)
             x_list.append(x_new)
 
         x = [

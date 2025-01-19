@@ -39,20 +39,6 @@ class Flip(nn.Module):
         return x
 
 
-class Shuffle(nn.Module):
-    # shuffle channels order
-    def __init__(self, prob=0.5):
-        super().__init__()
-        self.prob = prob
-
-    def forward(self, x):
-        if self.training and torch.rand(1) < self.prob:
-            B, C, T = x.shape
-            perm = torch.randperm(C)
-            return x[:, perm, :]
-        return x
-
-
 class TemporalMask(nn.Module):
     # Randomly mask a portion of timestamps across all channels
     def __init__(self, ratio=0.1):
@@ -65,6 +51,21 @@ class TemporalMask(nn.Module):
             num_mask = int(T * self.ratio)
             mask_indices = torch.randperm(T)[:num_mask]
             x[:, :, mask_indices] = 0
+        return x
+
+
+class ChannelMask(nn.Module):
+    # Randomly mask a portion of channels across all timestamps
+    def __init__(self, ratio=0.1):
+        super().__init__()
+        self.ratio = ratio
+
+    def forward(self, x):
+        if self.training:
+            B, C, T = x.shape
+            num_mask = int(C * self.ratio)
+            mask_indices = torch.randperm(C)[:num_mask]
+            x[:, mask_indices, :] = 0
         return x
 
 
@@ -104,10 +105,6 @@ def get_augmentation(augmentation):
         if len(augmentation) == 4:
             return Flip()
         return Flip(float(augmentation[4:]))
-    elif augmentation.startswith("shuffle"):
-        if len(augmentation) == 7:
-            return Shuffle()
-        return Shuffle(float(augmentation[7:]))
     elif augmentation.startswith("frequency"):
         if len(augmentation) == 9:
             return FrequencyMask()
@@ -116,6 +113,10 @@ def get_augmentation(augmentation):
         if len(augmentation) == 4:
             return TemporalMask()
         return TemporalMask(float(augmentation[4:]))
+    elif augmentation.startswith("channel"):
+        if len(augmentation) == 7:
+            return ChannelMask()
+        return ChannelMask(float(augmentation[7:]))
     elif augmentation == "none":
         return nn.Identity()
     else:

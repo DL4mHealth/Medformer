@@ -6,6 +6,22 @@
 
 #### Medformer Paper: [Preprint](https://arxiv.org/pdf/2405.19363)
 
+## Some Updates
+We make some updates to the code for better performance. Here is the list of updates: 
+1) Concatenated routers are used instead of concatenated patch embedding as an output representation for the final prediction.
+2) Data augmentation is now performed on the raw data instead of embeddings.
+3) Add channel embedding to each granularity embedding.
+
+For example, the updated code achieves 53.56% F1 score with the default parameters, 
+easily surpassing the old version's carefully parameter-tuned 50.65% F1 Score, with less number of granularities and faster training speed.
+```bash  
+python -u run.py --task_name classification --is_training 1 --root_path ./dataset/ADFTD/ --model_id ADFTD-Indep --model Medformer --data ADFTD \
+  --e_layers 6 --batch_size 128 --d_model 128 --d_ff 256 --patch_len_list 2,4,8 --augmentations flip,frequency,jitter,mask,channel,drop --swa \
+  --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 100 --patience 10
+```
+
+For reproducing the results in the paper, please use this version of code: https://github.com/DL4mHealth/Medformer/tree/446275f27b713a9f09917a6ba0bc51a18e921597
+
 ## Overview  
 This repository contains the description of five datasets and the code of the Medformer model for the paper 
 *Medformer: A Multi-Granularity Patching Transformer for Medical Time-Series Classification*. 
