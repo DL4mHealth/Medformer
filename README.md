@@ -4,7 +4,7 @@
 #### [Yihe Wang*](https://scholar.google.com/citations?user=1JRRcVkAAAAJ&hl=en)(ywang145@charlotte.edu), [Nan Huang*](https://github.com/TeddyHuang-00)(nhuang1@charlotte.edu), [Taida Li*](https://webpages.charlotte.edu/tli14/)(tli14@charlotte.edu),
 ####  [Yujun Yan](https://sites.google.com/umich.edu/yujunyan/home)(yujun.yan@dartmouth.edu), [Xiang Zhang](http://xiangzhang.info/)(xiang.zhang@charlotte.edu)
 
-#### Medformer Paper: [Preprint](https://arxiv.org/pdf/2405.19363)
+#### Medformer Paper: [Preprint](https://arxiv.org/pdf/2405.19363), [Official](https://proceedings.neurips.cc/paper_files/paper/2024/file/3fe2a777282299ecb4f9e7ebb531f0ab-Paper-Conference.pdf)
 
 ## Some Updates
 We make some updates to the code for better performance. Here is the list of updates: 
@@ -205,11 +205,13 @@ and the `--data` is the name of the dataloader you added in `data_factory.py`.
 If you find this repo useful, please star our project and cite our paper.
 
 ```
-@article{wang2024medformer,
-  title={Medformer: A Multi-Granularity Patching Transformer for Medical Time-Series Classification},
+@article{wang2025medformer,
+  title={Medformer: A multi-granularity patching transformer for medical time-series classification},
   author={Wang, Yihe and Huang, Nan and Li, Taida and Yan, Yujun and Zhang, Xiang},
   journal={Advances in Neural Information Processing Systems},
-  year={2024}
+  volume={37},
+  pages={36314--36341},
+  year={2025}
 }
 ```
 
