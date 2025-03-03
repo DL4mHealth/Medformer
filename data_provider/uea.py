@@ -167,30 +167,23 @@ def bandpass_filter_func(signal, fs, lowcut, highcut):
     return filtered_signal
 
 
-def normalize_ts(ts):
-    """normalize a time-series data
-
-    Args:
-        ts (numpy.ndarray): The input time-series in shape (timestamps, feature).
-
-    Returns:
-        ts (numpy.ndarray): The processed time-series.
-    """
-    scaler = StandardScaler()
-    scaler.fit(ts)
-    ts = scaler.transform(ts)
-    return ts
-
-
 def normalize_batch_ts(batch):
-    """normalize a batch of time-series data
+    """Normalize a batch of time-series data.
 
     Args:
-        batch (numpy.ndarray): A batch of input time-series in shape (n_samples, timestamps, feature).
+        batch (numpy.ndarray): A batch of input time-series in shape (N, T, C).
 
     Returns:
-        A batch of processed time-series.
+        numpy.ndarray: A batch of processed time-series, normalized for each channel of each sample.
     """
-    return np.array(
-        list(map(normalize_ts, batch))
-    )
+    # Calculate mean and std for each sample's each channel
+    mean_values = batch.mean(axis=1, keepdims=True)  # Shape: (N, 1, C)
+    std_values = batch.std(axis=1, keepdims=True)  # Shape: (N, 1, C)
+
+    # Avoid division by zero by setting small std to 1
+    std_values[std_values == 0] = 1.0
+
+    # Perform standard normalization
+    normalized_batch = (batch - mean_values) / std_values
+
+    return normalized_batch
