@@ -205,13 +205,13 @@ and the `--data` is the name of the dataloader you added in `data_factory.py`.
 If you find this repo useful, please star our project and cite our paper.
 
 ```
-@article{wang2025medformer,
+@article{wang2024medformer,
   title={Medformer: A multi-granularity patching transformer for medical time-series classification},
   author={Wang, Yihe and Huang, Nan and Li, Taida and Yan, Yujun and Zhang, Xiang},
   journal={Advances in Neural Information Processing Systems},
   volume={37},
   pages={36314--36341},
-  year={2025}
+  year={2024}
 }
 ```
 
